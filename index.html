@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="scripts/main.js" defer></script>   
+    <title>Mansion Murder</title>
+</head>
+<body class="middle">
+
+    <!-- Start Screen -->
+    <div class="start-screen middle">
+        <div class="middle">
+            <label for="name">Please enter your last name:</label>
+            <input type="text" id="name">
+            <p>Click to continue</p>
+        </div>        
+    </div>
+
+    <!-- Game Board -->
+    <div class="game-board">
+        <!-- Header -->
+        <header class="middle">
+            <h1>Mansion Murder</h1>
+        </header>
+        
+        <!-- Room images -->
+        <div class="rooms">
+            <img src="img/mansion.jpg" alt="dark picture of a mansion">
+        </div>        
+        
+        <!-- Text Area -->
+        <div class="text-area middle">
+            <div></div>
+            <p class="commands"></p>
+            <form>
+                <input type="text">
+                <button type="button">Send</button>
+            </form>
+        </div>
+
+        <!-- Room Completion -->
+        <div class="room-completion middle">
+            <p>Room completion:</p>
+            <div class="middle">
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map middle">
+            <div class="map-img middle"><p>Something important should take up this space...</p></div>
+            <map name="room-map">
+                <area shape="rect" class="basement" coords="15,27,170,140" href="#">
+                <area shape="rect" class="bedroom" coords="230,27,410,125" href="#">
+                <area shape="rect" class="living-room" coords="230,140,390,250" href="#">
+                <area shape="rect" class="hallway" coords="230,280,390,340" href="#">
+                <area shape="rect" class="kitchen" coords="410,140,580,330" href="#">
+            </map>
+        </div>        
+
+        <!-- Inventory and Suspect tabs -->
+        <div class="inventory">
+            <table>
+                <tr>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                </tr>
+                <tr>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>                    
+                </tr>
+                <tr>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                    <td><img src="img/emptyslot.jpg"></td>
+                </tr>                    
+            </table>
+
+            <div class="combo middle">
+                <img src="img/comboslot.jpg">
+                <img src="img/comboslot.jpg">
+                <button type="button">Combine</button>
+            </div>
+        </div>
+
+        <div class="suspects">
+            <div>
+                <p>The Maid</p>
+                <img src="img/maid.jpg">
+                <ul>
+                    <li>Claudia</li>
+                    <li>1917/08/19</li>
+                    <li>Maid</li>
+                    <li>166cm</li>
+                    <li>66kg</li>
+                </ul>
+            </div>
+            <div>
+                <p>The Husband</p>
+                <img src="img/husband.jpg">
+                <ul>
+                    <li>George</li>
+                    <li>1908/06/22</li>
+                    <li>Writer</li>
+                    <li>190cm</li>
+                    <li>88kg</li>
+                </ul>
+            </div>
+            <div>
+                <p>Best friend</p>
+                <img src="img/bestfriend.jpg">
+                <ul>
+                    <li>Nadja</li>
+                    <li>1911/01/14</li>
+                    <li>Secretary</li>
+                    <li>159cm</li>
+                    <li>60kg</li>
+                </ul>
+            </div>
+            <div>
+                <p>The Chef</p>
+                <img src="img/chef.jpg">
+                <ul>
+                    <li>Bruce</li>
+                    <li>1915/11/11</li>
+                    <li>Chef</li>
+                    <li>179cm</li>
+                    <li>82kg</li>
+                </ul>
+            </div>
+            <div>
+                <p>The Gardener</p>
+                <img src="img/gardener.jpg">
+                <ul>
+                    <li>Alfred</li>
+                    <li>1891/04/10</li>
+                    <li>Gardener</li>
+                    <li>186cm</li>
+                    <li>85kg</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="inventory-tab middle"><p>Inventory</p></div>
+            <div class="suspects-tab middle"><p>Suspects</p></div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

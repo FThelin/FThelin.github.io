@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Press+Start+2P|Special+Elite&display=swap');
+
+/*
+font-family: 'Special Elite', cursive;
+font-family: 'Press Start 2P', cursive;
+font-family: 'Londrina Solid', cursive;
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: #303030;
+    height: 100vh;
+    background: url(img/house.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Special Elite', cursive;  
+}
+
+/***** Start Screen ****/
+.start-screen {
+    background-color: rgb(0, 0, 0);
+    border: 2px solid #8d8d8d;
+    box-shadow: 0 0 10px #8d8d8d;
+    border-radius: 5px;
+    width: 80rem;
+    height: 50rem;
+    position: absolute;
+    color: #8d8d8d;
+}
+
+.start-screen div {
+    width: 30rem;
+    height: 10rem;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 22px;
+}
+
+.start-screen div input {
+    height: 3rem;
+    width: 80%;
+    font-family: 'Special Elite', cursive;  
+    font-size: 20px;
+}
+
+.start-screen div p {
+    animation: blink 2s infinite;
+}
+
+.start-screen div p:hover {
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/***** Game Board *****/
+.game-board {
+    background-color: rgba(119, 119, 119, 0.3);
+    border: 2px solid #8d8d8d;
+    box-shadow: 0 0 10px #8d8d8d;
+    border-radius: 5px;
+    width: 80rem;
+    height: 50rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas: 
+    "hd hd hd hd hd hd rc rc rc rc rc rc"
+    "rm rm rm rm rm rm mp mp mp mp mp mp"
+    "rm rm rm rm rm rm mp mp mp mp mp mp"
+    "rm rm rm rm rm rm mp mp mp mp mp mp"
+    "rm rm rm rm rm rm mp mp mp mp mp mp"
+    "ta ta ta ta ta ta is is is is is it"
+    "ta ta ta ta ta ta is is is is is st"
+    "ta ta ta ta ta ta is is is is is ."
+    ;
+    
+}
+
+/***** Header *****/
+header {
+    grid-area: hd;
+}
+
+header h1 {
+    font-size: 48px;
+    background-color: black;
+    color: rgb(196, 196, 196);
+    padding: 0.2rem;
+    font-weight: 300;
+    transform: rotate(-3deg);
+}
+
+/***** Rooms *****/
+.rooms {    
+    grid-area: rm;
+}
+
+.rooms img {
+    width: 100%;
+}
+
+/***** Text Area *****/
+.text-area {    
+    grid-area: ta;
+    flex-direction: column;
+    background: url(img/leather.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: inset 40px 40px 37px -10px rgba(0,0,0,0.75);
+    padding: 1rem;
+}
+
+.text-area div {
+    width: 100%;
+    height: 85%;
+    padding: 3rem;
+    font-size: 22px;    
+}
+
+form {
+    width: 100%;
+    height: 15%;
+}
+
+.text-area form input {
+    width: 80%;
+    height: 100%;
+    background-color: rgba(161, 161, 161, 0.151);
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 5px;
+    font-family: 'Special Elite', cursive;  
+    font-size: 22px;
+}
+
+.text-area form input:focus {
+    outline: none;
+}
+
+.text-area form button {
+    width: 19%;
+    height: 100%;
+    background-color: #000000a6;
+    border: 1px solid black;
+    color: rgb(194, 194, 194);
+    border-radius: 5px;
+}
+
+.text-area form button:hover {
+    background-color: #2c2c2ca6;
+}
+
+.commands {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/***** Room Completion *****/
+.room-completion {
+    color: rgb(194, 194, 194);
+    grid-area: rc;
+    flex-direction: column;
+    font-size: 22px;
+    visibility: hidden;
+}
+
+.room-completion div {
+    width: 15rem;
+    border: 2px solid black;
+    border-radius: 7px;
+    font-size: 18px;
+}
+
+.room-completion div p {
+    margin-top: 2px;
+}
+
+/***** Map *****/
+.map {    
+    grid-area: mp;
+}
+
+.map-img {
+    width: 100%;
+    height: 100%;
+}
+
+.map-img img {
+    height: 100%;
+    width: 100%;
+}
+
+map area:hover {
+    cursor: pointer;  
+}
+
+map area:focus {
+    outline: none;
+}
+
+/***** Inventory *****/
+.inventory {
+    background-color: #FFDBAD;
+    grid-area: is;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inventory td:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.combo {
+    display: flex;
+}
+
+.combo img {
+    margin-right: 1rem;
+}
+
+.combo button {
+    height: 3rem;
+    width: 5rem;    
+    background-color: #000000a6;
+    border: 1px solid black;
+    color: rgb(194, 194, 194);
+    border-radius: 5px;
+}
+
+.combo button:hover {
+    background-color: #2c2c2ca6;
+}
+
+/***** Suspects *****/
+.suspects {
+    background-color: rgb(175, 142, 80);
+    grid-area: is;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    display: none;    
+}
+
+.suspects img {
+    box-shadow: 1px 1px 4px black;
+}
+
+.suspects ul {
+    list-style-type: none;
+}
+
+.suspects ul li {
+    font-size: 13px;
+}
+
+.suspects div p {
+    font-size: 14px;
+}
+
+/***** Tabs *****/
+.tabs {
+    background-color: gray;
+}
+
+.inventory-tab {
+    grid-area: it;
+    background-color: #FFDBAD;
+    height: 5rem;
+}
+
+.inventory-tab:hover, .suspects-tab:hover {
+    background-color: rgb(250, 235, 216);
+    cursor: pointer;
+}
+
+.inventory-tab p, .suspects-tab p {
+    transform: rotate(-45deg);
+}
+
+.suspects-tab {
+    background-color: rgb(175, 142, 80);
+    grid-area: st;
+    height: 5rem;
+}
