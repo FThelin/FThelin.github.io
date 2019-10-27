@@ -1,14 +1,45 @@
 $(document).ready(function(){
 
     //Global Variables
-    let source, comboSource, playerName, hallwayDone;
-    let livingroomDone = 0;
-    let kitchenDone = 0;
-    let bedroomDone = 0;
-    let basementDone= 0;
     let gameState = 0;
-    const inventory = $('table tr td');
-    const comboSlots =$('.combo img');
+    let playerName;
+
+    const hallway = {
+        completion: 0,
+        inRoom: 'hallway'
+    };
+
+    const kitchen = {
+        completion: 0,
+        inPhase: false,
+        inRoom: 'kitchen'
+    };
+
+    const livingRoom = {
+        completion: 0,
+        inPhase: false,
+        inRoom: 'livingRoom'
+    };
+
+    const bedroom = {
+        completion: 0,
+        inPhase: false,
+        inRoom: 'bedroom'
+    };
+
+    const basement = {
+        completion: 0,
+        inPhase: false,
+        inRoom: 'basement'
+    }
+
+    const inventory = {
+        slots: $('table tr td'),
+        comboSlots: $('.combo img'),
+        source: '',
+        comboSource: ''
+    }
+
         
     //Write text to the text area and show commands
     const writeText = (message, commands) => {
@@ -50,13 +81,13 @@ $(document).ready(function(){
     })
     
     //Get inventory items to combo slots
-    $(inventory).click(e => {
-        source = e.target.getAttribute('src');
-        if (source != 'img/emptyslot.jpg') {
-            for(let i = 0; i < comboSlots.length; i++){
-                comboSource = comboSlots[i].getAttribute('src');
-                if (comboSource === 'img/comboslot.jpg'){
-                    comboSlots[i].setAttribute('src', source);
+    $(inventory.slots).click(e => {
+        inventory.source = e.target.getAttribute('src');
+        if (inventory.source != 'img/emptyslot.jpg') {
+            for(let i = 0; i < inventory.comboSlots.length; i++){
+                inventory.comboSource = inventory.comboSlots[i].getAttribute('src');
+                if (inventory.comboSource === 'img/comboslot.jpg'){
+                    inventory.comboSlots[i].setAttribute('src', inventory.source);
                     break;
                 }
             }
@@ -64,62 +95,26 @@ $(document).ready(function(){
     });
 
     //Remove items from combo slots
-    $(comboSlots).click(e => {
-        comboSource = e.target.getAttribute('src');
-        if (comboSource != 'img/comboslot.jpg'){
+    $(inventory.comboSlots).click(e => {
+        inventory.comboSource = e.target.getAttribute('src');
+        if (inventory.comboSource != 'img/comboslot.jpg'){
             e.target.setAttribute('src', 'img/comboslot.jpg');
         }
     })
 
     //Combine items from the inventory
     $('.combo button').click(() => {
-        let comboSource1 = comboSlots[0].getAttribute('src');
-        let comboSource2 = comboSlots[1].getAttribute('src');
+        let comboSource1 = inventory.comboSlots[0].getAttribute('src');
+        let comboSource2 = inventory.comboSlots[1].getAttribute('src');
         if (gameState === 5 && comboSource1 === 'img/inventory/lipstick.jpg' && comboSource2 === 'img/inventory/paper.jpg' 
         || comboSource1 === 'img/inventory/paper.jpg' && comboSource2 === 'img/inventory/lipstick.jpg') {
             gameState = 6
             writeText('The maid: There you go. This is a map over the house. Use it to find your way to the other rooms.', '');
             $('.map-img').html('<img src="img/map.jpg" usemap="#room-map">');
-            comboSlots[0].setAttribute('src', 'img/comboslot.jpg');
-            comboSlots[1].setAttribute('src', 'img/comboslot.jpg');
+            inventory.comboSlots[0].setAttribute('src', 'img/comboslot.jpg');
+            inventory.comboSlots[1].setAttribute('src', 'img/comboslot.jpg');
         }
-    })
-
-    //Go to rooms using map
-    $('map area').click(e => {
-        e.preventDefault();
-        $('.room-completion').css('visibility', 'visible');
-        hallwayDone = 23;
-        let room = e.target.getAttribute('class');
-        switch (room){
-            case 'hallway':
-                changeImage('img/hallway.jpg');
-                $('.room-completion div p').text(`Hallway: ${hallwayDone}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${hallwayDone}%, rgba(0, 255, 255, 0) 0%)`);
-                break;
-            case 'living-room':
-                changeImage('img/livingroom.jpg');
-                $('.room-completion div p').text(`Living room: ${livingroomDone}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${livingroomDone}%, rgba(0, 255, 255, 0) 0%)`);
-                break;
-            case 'kitchen':
-                changeImage('img/kitchen.jpg');
-                $('.room-completion div p').text(`Kitchen: ${kitchenDone}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${kitchenDone}%, rgba(0, 255, 255, 0) 0%)`);
-                break;
-            case 'bedroom':
-                changeImage('img/bedroom.jpg');
-                $('.room-completion div p').text(`Bedroom: ${bedroomDone}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${bedroomDone}%, rgba(0, 255, 255, 0) 0%)`);
-                break;
-            case 'basement':
-                changeImage('img/basement.jpg');
-                $('.room-completion div p').text(`Basement: ${basementDone}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${basementDone}%, rgba(0, 255, 255, 0) 0%)`);
-            break;
-        }
-    })
-    
+    })    
 
     //-----------------------------------------------------------------------------------------//
 
@@ -174,9 +169,9 @@ $(document).ready(function(){
                 if (commandEntered === "add to inventory"){
                     writeText('You: Maybe I should get a closer look at these items.', '/Examine paper  /Examine lipstick  /Examine bell');
                     clearCommandPrompt();
-                    $(inventory[0]).html('<img src="img/inventory/paper.jpg">');
-                    $(inventory[1]).html('<img src="img/inventory/lipstick.jpg">');
-                    $(inventory[2]).html('<img src="img/inventory/bell.jpg">');
+                    $(inventory.slots[0]).html('<img src="img/inventory/paper.jpg">');
+                    $(inventory.slots[1]).html('<img src="img/inventory/lipstick.jpg">');
+                    $(inventory.slots[2]).html('<img src="img/inventory/bell.jpg">');
                     gameState = 3; 
                 } else if (commandEntered === "ignore items"){
                     clearCommandPrompt();
@@ -216,13 +211,81 @@ $(document).ready(function(){
                 } else {
                     wrongCommand();                
                 }
-            break; 
-
-            
-                
-                
+            break;
+            case 7:
+                if (kitchen.inRoom === "kitchen"){
+                    if (commandEntered === "search kitchen"){
+                        writeText('Du är i köket', 'Test');
+                    } else {
+                        wrongCommand();
+                    }
+                }
+                if (livingRoom.inRoom === "livingRoom"){
+                    if (commandEntered === "search living room"){
+                        writeText('Du är i vardagsrummet', 'Test');
+                    } else {
+                        wrongCommand();
+                    }
+                }
+                if (bedroom.Inroom === "bedroom"){
+                    if (commandEntered === "search bedroom"){
+                        writeText('Du är i sovrummet', 'Test');
+                    } else {
+                        wrongCommand();
+                    }
+                } 
+            break;
         }
     })
 
+    //Go to rooms using map
+    $('map area').click(e => {
+        e.preventDefault();
+        $('.room-completion').css('visibility', 'visible');
+        hallway.completion = 100;
+        let room = e.target.getAttribute('class');
+        switch (room){
+            case 'hallway':
+                gameState = 7;
+                hallway.inRoom = "hallway";
+                changeImage('img/hallway.jpg');
+                $('.room-completion div p').text(`Hallway: ${hallway.completion}%`);
+                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${hallway.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                writeText('You: All done in here!', '');
+                break;
+            case 'living-room':
+                gameState = 7;
+                livingRoom.inRoom = "livingRoom";
+                changeImage('img/livingroom.jpg');
+                $('.room-completion div p').text(`Living room: ${livingRoom.completion}%`);
+                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${livingRoom.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                writeText('You: What the hell happened in here, looks like there´s been some kind of struggle. Maybe between the victim and the murderer?', '/Search living room');
+                break;
+            case 'kitchen':
+                gameState = 7;
+                kitchen.inRoom = "kitchen";    
+                changeImage('img/kitchen.jpg');
+                $('.room-completion div p').text(`Kitchen: ${kitchen.completion}%`);
+                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${kitchen.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                writeText('You: Kitchen looks neat and clean. I can definitley go for a snack.', '/Search kitchen');
+                break;
+            case 'bedroom':
+                gameState = 7;
+                bedroom.inRoom = "bedroom";
+                changeImage('img/bedroom.jpg');
+                $('.room-completion div p').text(`Bedroom: ${bedroom.completion}%`);
+                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${bedroom.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                writeText('You: This is the victim´s bedroom. She and her husband used seperated bedrooms.', '/Search bedroom');
+                break;
+            case 'basement':
+                gameState = 7;
+                basement.inRoom = "basement";
+                changeImage('img/basementdoor.jpg');
+                $('.room-completion div p').text(`Basement: ${basement.completion}%`);
+                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${basement.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                writeText('You: Hmm, the door is locked. I need a key to be able to open it.', '');
+            break;
+        }
+    })
        
 })

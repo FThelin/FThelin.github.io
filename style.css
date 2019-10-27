@@ -155,6 +155,7 @@ form {
     border-radius: 5px;
     font-family: 'Special Elite', cursive;  
     font-size: 22px;
+    text-indent: 0.5rem;
 }
 
 .text-area form input:focus {
