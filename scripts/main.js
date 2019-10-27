@@ -3,34 +3,30 @@ $(document).ready(function(){
     //Global Variables
     let gameState = 0;
     let playerName;
+    let inRoom;
 
     const hallway = {
         completion: 0,
-        inRoom: 'hallway'
     };
 
     const kitchen = {
         completion: 0,
-        inPhase: false,
-        inRoom: 'kitchen'
+        roomState: 0,
     };
 
     const livingRoom = {
         completion: 0,
-        inPhase: false,
-        inRoom: 'livingRoom'
+        roomState: 0,
     };
 
     const bedroom = {
         completion: 0,
-        inPhase: false,
-        inRoom: 'bedroom'
+        roomState: 0,
     };
 
     const basement = {
         completion: 0,
-        inPhase: false,
-        inRoom: 'basement'
+        roomState: 0,
     }
 
     const inventory = {
@@ -212,31 +208,92 @@ $(document).ready(function(){
                     wrongCommand();                
                 }
             break;
-            case 7:
-                if (kitchen.inRoom === "kitchen"){
-                    if (commandEntered === "search kitchen"){
-                        writeText('Du är i köket', 'Test');
-                    } else {
-                        wrongCommand();
-                    }
+        }
+
+        switch (inRoom){
+            case 'livingRoom':
+                switch (commandEntered){
+                    case 'search living room':
+                        livingRoom.roomState = 1;
+                        stageTwoWriteText();
+                        clearCommandPrompt();                        
+                        break;
                 }
-                if (livingRoom.inRoom === "livingRoom"){
-                    if (commandEntered === "search living room"){
-                        writeText('Du är i vardagsrummet', 'Test');
-                    } else {
-                        wrongCommand();
-                    }
+                break;
+            case 'kitchen':
+                switch (commandEntered) {
+                    case 'search kitchen':
+                        kitchen.roomState = 1;
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        break;
                 }
-                if (bedroom.Inroom === "bedroom"){
-                    if (commandEntered === "search bedroom"){
-                        writeText('Du är i sovrummet', 'Test');
-                    } else {
-                        wrongCommand();
-                    }
-                } 
-            break;
+                break;
+            case 'bedroom':
+                switch (commandEntered) {
+                    case 'search bedroom':
+                        bedroom.roomState = 1;
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        break;
+                }
+                break;
+            case 'basement':
+                switch (commandEntered) {
+                    case 'search bedroom':
+                        kitchen.roomState = 1;
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        break;
+                }
+                break;
         }
     })
+
+    //STAGE 2 COMMAND PROMT//
+    const stageTwoWriteText = () => {
+        switch (inRoom){
+            case 'livingRoom':
+                switch (livingRoom.roomState){
+                    case 0:
+                        writeText('You: What the hell happened in here, looks like there´s been some kind of struggle. Maybe between the victim and the murderer?', '/Search living room');
+                        break;
+                    case 1:
+                        writeText('Du är i vardagsrummet', 'test');
+                        break;
+                }
+                break;
+            case 'kitchen':
+                switch (kitchen.roomState){
+                    case 0:
+                        writeText('You: Kitchen looks neat and clean. I can definitley go for a snack.', '/Search kitchen');
+                        break;
+                    case 1:
+                        writeText('Du är i köket', 'test');
+                        break;
+                }
+                break;
+            case 'bedroom':
+                switch (bedroom.roomState){
+                    case 0:
+                        writeText('You: This is the victim´s bedroom. She and her husband used seperated bedrooms.', '/Search bedroom');
+                        break;
+                    case 1:
+                        writeText('Du är i sovrummet', 'test');
+                        break;
+                }
+                break;
+            case 'basement':
+                switch (basement.roomState){
+                    case 0:
+                        writeText('You: Hmm, the door is locked. I need a key to be able to open it.', '');
+                        break;
+                    case 1:
+                        writeText('Källaren är låst', 'test');
+                }
+                break;    
+        }   
+    }
 
     //Go to rooms using map
     $('map area').click(e => {
@@ -245,45 +302,40 @@ $(document).ready(function(){
         hallway.completion = 100;
         let room = e.target.getAttribute('class');
         switch (room){
-            case 'hallway':
-                gameState = 7;
-                hallway.inRoom = "hallway";
+            case 'hallway':                
+                inRoom = "hallway";
                 changeImage('img/hallway.jpg');
                 $('.room-completion div p').text(`Hallway: ${hallway.completion}%`);
                 $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${hallway.completion}%, rgba(0, 255, 255, 0) 0%)`);
-                writeText('You: All done in here!', '');
+                writeText('You: All done in here!', '');                
                 break;
             case 'living-room':
-                gameState = 7;
-                livingRoom.inRoom = "livingRoom";
+                inRoom = "livingRoom";
                 changeImage('img/livingroom.jpg');
                 $('.room-completion div p').text(`Living room: ${livingRoom.completion}%`);
                 $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${livingRoom.completion}%, rgba(0, 255, 255, 0) 0%)`);
-                writeText('You: What the hell happened in here, looks like there´s been some kind of struggle. Maybe between the victim and the murderer?', '/Search living room');
+                stageTwoWriteText();
                 break;
             case 'kitchen':
-                gameState = 7;
-                kitchen.inRoom = "kitchen";    
+                inRoom = "kitchen";    
                 changeImage('img/kitchen.jpg');
                 $('.room-completion div p').text(`Kitchen: ${kitchen.completion}%`);
                 $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${kitchen.completion}%, rgba(0, 255, 255, 0) 0%)`);
-                writeText('You: Kitchen looks neat and clean. I can definitley go for a snack.', '/Search kitchen');
+                stageTwoWriteText();
                 break;
             case 'bedroom':
-                gameState = 7;
-                bedroom.inRoom = "bedroom";
+                inRoom = "bedroom";
                 changeImage('img/bedroom.jpg');
                 $('.room-completion div p').text(`Bedroom: ${bedroom.completion}%`);
                 $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${bedroom.completion}%, rgba(0, 255, 255, 0) 0%)`);
-                writeText('You: This is the victim´s bedroom. She and her husband used seperated bedrooms.', '/Search bedroom');
+                stageTwoWriteText();
                 break;
             case 'basement':
-                gameState = 7;
-                basement.inRoom = "basement";
+                inRoom = "basement";
                 changeImage('img/basementdoor.jpg');
                 $('.room-completion div p').text(`Basement: ${basement.completion}%`);
                 $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${basement.completion}%, rgba(0, 255, 255, 0) 0%)`);
-                writeText('You: Hmm, the door is locked. I need a key to be able to open it.', '');
+                stageTwoWriteText();
             break;
         }
     })
