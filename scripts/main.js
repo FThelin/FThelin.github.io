@@ -110,7 +110,12 @@ $(document).ready(function(){
             inventory.comboSlots[0].setAttribute('src', 'img/comboslot.jpg');
             inventory.comboSlots[1].setAttribute('src', 'img/comboslot.jpg');
         }
-    })    
+    })
+    
+    const updateCompletion = (room, completion) => {
+        $('.room-completion div p').text(`${room}: ${completion}%`);
+        $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${completion}%, rgba(0, 255, 255, 0) 0%)`);
+    }
 
     //-----------------------------------------------------------------------------------------//
 
@@ -210,13 +215,24 @@ $(document).ready(function(){
             break;
         }
 
+        //PHASE 2 - Use roomState instead of gameState//
         switch (inRoom){
             case 'livingRoom':
                 switch (commandEntered){
                     case 'search living room':
                         livingRoom.roomState = 1;
+                        livingRoom.completion = 50;
+                        updateCompletion('Living room', livingRoom.completion);
                         stageTwoWriteText();
                         clearCommandPrompt();                        
+                        break;
+                    case 'add to inventory':
+                        livingRoom.roomState = 2;
+                        livingRoom.completion = 75;
+                        updateCompletion('Living room', livingRoom.completion);
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        $(inventory.slots[4]).html('<img src="img/inventory/hammer.jpg">');                        
                         break;
                 }
                 break;
@@ -224,8 +240,18 @@ $(document).ready(function(){
                 switch (commandEntered) {
                     case 'search kitchen':
                         kitchen.roomState = 1;
+                        kitchen.completion = 25;
+                        updateCompletion("Kitchen", kitchen.completion)
                         stageTwoWriteText();
                         clearCommandPrompt();
+                        break;
+                    case 'add to inventory':
+                        kitchen.roomState = 2;
+                        kitchen.completion = 50;
+                        updateCompletion("Kitchen", kitchen.completion)
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        $(inventory.slots[3]).html('<img src="img/inventory/chefhat.jpg">');
                         break;
                 }
                 break;
@@ -233,14 +259,25 @@ $(document).ready(function(){
                 switch (commandEntered) {
                     case 'search bedroom':
                         bedroom.roomState = 1;
+                        bedroom.completion = 25;
+                        updateCompletion('Bedroom', bedroom.completion);
                         stageTwoWriteText();
                         clearCommandPrompt();
+                        changeImage('img/bedroomcode.jpg');
+                        break;
+                    case 'green pink yellow orange':
+                        bedroom.roomState = 2;
+                        bedroom.completion = 50;
+                        updateCompletion('Bedroom', bedroom.completion);
+                        stageTwoWriteText();
+                        clearCommandPrompt();
+                        changeImage('img/bedroom.jpg');
                         break;
                 }
                 break;
             case 'basement':
                 switch (commandEntered) {
-                    case 'search bedroom':
+                    case 'placeholder':
                         kitchen.roomState = 1;
                         stageTwoWriteText();
                         clearCommandPrompt();
@@ -259,8 +296,10 @@ $(document).ready(function(){
                         writeText('You: What the hell happened in here, looks like there´s been some kind of struggle. Maybe between the victim and the murderer?', '/Search living room');
                         break;
                     case 1:
-                        writeText('Du är i vardagsrummet', 'test');
+                        writeText('You: Found a hammer. The victim was stabbed with a knife, but everything that can be used as a weapon is intresting to me.', '/Add to inventory');
                         break;
+                    case 2:
+                        writeText('You: Nothing to do here right now', '');
                 }
                 break;
             case 'kitchen':
@@ -269,18 +308,26 @@ $(document).ready(function(){
                         writeText('You: Kitchen looks neat and clean. I can definitley go for a snack.', '/Search kitchen');
                         break;
                     case 1:
-                        writeText('Du är i köket', 'test');
+                        writeText('You: Well, look at this! A chef´s hat, and there is some red stains on it. Blood? Also there is a drawer that can´t be opened.', '/Add to inventory');
+                        break;
+                    case 2:
+                        writeText('You: I need something to open that kitchen drawer with...', '');
+                        break;
+                    case 3:
+                        writeText('You: Sweet, the drawer contained a key. Also found this can of liquid nitrogen. May come in handy', '/Add both to inventory');
                         break;
                 }
                 break;
             case 'bedroom':
                 switch (bedroom.roomState){
                     case 0:
-                        writeText('You: This is the victim´s bedroom. She and her husband used seperated bedrooms.', '/Search bedroom');
+                        writeText('You: This is the victim´s bedroom. She and her husband used seperate bedrooms.', '/Search bedroom');
                         break;
                     case 1:
-                        writeText('Du är i sovrummet', 'test');
+                        writeText('You: The victim had a safety security box. But I need some kind of code to open it. I think I have to tell the correct order of the colors. There is blue, yellow, pink, orange and green.', 'color color color color');
                         break;
+                    case 2:
+                        writeText('You: Nailed it! Inside is a love letter from a secret admirer and a rusty key.', '/Add to inventory');
                 }
                 break;
             case 'basement':
@@ -303,38 +350,33 @@ $(document).ready(function(){
         let room = e.target.getAttribute('class');
         switch (room){
             case 'hallway':                
-                inRoom = "hallway";
+                inRoom = 'hallway';
                 changeImage('img/hallway.jpg');
-                $('.room-completion div p').text(`Hallway: ${hallway.completion}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${hallway.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                updateCompletion('Hallway', hallway.completion);
                 writeText('You: All done in here!', '');                
                 break;
             case 'living-room':
                 inRoom = "livingRoom";
                 changeImage('img/livingroom.jpg');
-                $('.room-completion div p').text(`Living room: ${livingRoom.completion}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${livingRoom.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                updateCompletion('Living room', livingRoom.completion);
                 stageTwoWriteText();
                 break;
             case 'kitchen':
                 inRoom = "kitchen";    
                 changeImage('img/kitchen.jpg');
-                $('.room-completion div p').text(`Kitchen: ${kitchen.completion}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${kitchen.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                updateCompletion('Kitchen', kitchen.completion);
                 stageTwoWriteText();
                 break;
             case 'bedroom':
                 inRoom = "bedroom";
                 changeImage('img/bedroom.jpg');
-                $('.room-completion div p').text(`Bedroom: ${bedroom.completion}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${bedroom.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                updateCompletion('Bedroom', bedroom.completion);
                 stageTwoWriteText();
                 break;
             case 'basement':
                 inRoom = "basement";
                 changeImage('img/basementdoor.jpg');
-                $('.room-completion div p').text(`Basement: ${basement.completion}%`);
-                $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${basement.completion}%, rgba(0, 255, 255, 0) 0%)`);
+                updateCompletion('Basement', basement.completion);
                 stageTwoWriteText();
             break;
         }
