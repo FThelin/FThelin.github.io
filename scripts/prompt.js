@@ -88,6 +88,13 @@ $('form button').click(() => {
                     clearCommandPrompt();
                     $(inventory.slots[4]).html('<img src="img/inventory/hammer.jpg">');                        
                     break;
+                case 'write it down':
+                    livingRoom.roomState = 4;                    
+                    updateCompletion('Living room', livingRoom.completion);
+                    stageTwoWriteText();
+                    clearCommandPrompt();
+                    $(inventory.slots[9]).html('<img src="img/inventory/code.jpg">');                                           
+                    break;
                 default:
                     wrongCommand();
                     break;
@@ -158,10 +165,47 @@ $('form button').click(() => {
             break;
         case 'basement':
             switch (commandEntered) {
-                case 'placeholder':
-                    kitchen.roomState = 1;
+                case 'search basement':
+                    basement.roomState = 2;
+                    basement.completion = 30;
+                    updateCompletion('Basement', basement.completion);
                     stageTwoWriteText();
                     clearCommandPrompt();
+                    break;
+                case 'examine safe':
+                    basement.roomState = 3;
+                    basement.completion = 50;
+                    updateCompletion('Basement', basement.completion);
+                    stageTwoWriteText();
+                    clearCommandPrompt();
+                    changeImage('img/basementwires.jpg');
+                    break;
+                case 'fix wiring':
+                    basement.roomState = 4;
+                    basement.completion = 65;
+                    updateCompletion('Basement', basement.completion);                    
+                    clearCommandPrompt();
+                    $('.wires').css('display', 'flex');
+                    $('.btn').css('display', 'block');                    
+                    break;
+                case '9 1 0 4 2 3':
+                    basement.roomState = 6;
+                    basement.completion = 90;
+                    updateCompletion('Basement', basement.completion);                    
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
+                    break;
+                case 'think':
+                    basement.roomState = 7;
+                    basement.completion = 100;
+                    updateCompletion('Basement', basement.completion);                    
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
+                    break;
+                case 'alfred':
+                    basement.roomState = 8;                                            
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
                     break;
                 default:
                     wrongCommand();

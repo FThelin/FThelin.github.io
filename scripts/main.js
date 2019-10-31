@@ -55,13 +55,6 @@
         $('.rooms img').attr('src' ,url);
     } 
 
-    //Check gameState (for testing)
-    $(document).keypress( e => {
-        if (e.which == 13) {
-            console.log(gameState);
-        }
-    });
-
     //Switch between suspects and inventory view
     $('.inventory-tab').click(() => {
         $('.inventory').css('display', 'flex');
@@ -102,10 +95,19 @@
                 writeText('You: All done in here!', '');                
                 break;
             case 'living-room':
-                if (bedroom.roomState === 3 && kitchen.roomState === 4 ){
-                    alert('wohoo!'); //Body taken away, code to safe under body in blood
-                } else {
-                    inRoom = "livingRoom";
+                inRoom = "livingRoom";
+                if (bedroom.roomState === 3 && kitchen.roomState === 4 && livingRoom.roomState === 2){
+                    changeImage('img/livingroomblood.jpg');
+                    livingRoom.roomState = 3;
+                    livingRoom.completion = 100;
+                    updateCompletion('Living room', livingRoom.completion);
+                    stageTwoWriteText();
+                    clearCommandPrompt();
+                } else if (livingRoom.roomState === 4 || livingRoom.roomState === 3) {
+                    changeImage('img/livingroomblood.jpg');
+                    updateCompletion('Living room', livingRoom.completion);
+                    stageTwoWriteText();
+                } else {                    
                     changeImage('img/livingroombody.jpg');
                     updateCompletion('Living room', livingRoom.completion);
                     stageTwoWriteText();
@@ -118,16 +120,28 @@
                 stageTwoWriteText();                    
                 break;
             case 'bedroom':
-                inRoom = "bedroom";
-                changeImage('img/bedroom.jpg');
+                inRoom = "bedroom";                
                 updateCompletion('Bedroom', bedroom.completion);
                 stageTwoWriteText();
+                if (bedroom.roomState === 1) {
+                    changeImage('img/bedroomcode.jpg');
+                } else {
+                    changeImage('img/bedroom.jpg');
+                }
                 break;
             case 'basement':
                 inRoom = "basement";
-                changeImage('img/basementdoor.jpg');
                 updateCompletion('Basement', basement.completion);
                 stageTwoWriteText();
+                if (basement.roomState <= 0){
+                    changeImage('img/basementdoor.jpg');                    
+                } else if (basement.roomState <= 2){
+                    changeImage('img/basement.jpg'); 
+                } else if (basement.roomState <= 4){
+                    changeImage('img/basementwires.jpg');
+                } else if (basement.roomState >= 5){
+                    changeImage('img/basementsafe.jpg');
+                }                               
             break;
         }
     })

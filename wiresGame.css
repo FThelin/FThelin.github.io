@@ -1,0 +1,78 @@
+.wires {
+    width: 35rem;
+    height: 35rem;
+    background-color: rgb(34, 34, 34);
+    display: none;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 35%;
+    top: 15%;
+    box-shadow: 4px 4px 16px black;    
+}
+
+.btn {
+    position: absolute;
+    left: 47.5%;
+    top: 11%;
+    width: 5rem;
+    height: 2rem;
+    background-color: rgb(64, 252, 89);
+    display: none;
+}
+
+.wires .outer {
+    border: 1px solid rgb(104, 104, 104);
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noColor {
+    background-color: rgb(34, 34, 34);
+    width: 2rem;
+    height: 2rem;
+}
+
+.lightblue {
+    background-color: rgb(0, 255, 200);    
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.blue {
+    background-color: rgb(36, 36, 173);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.yellow {
+    background-color: rgb(245, 245, 98);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.green {
+    background-color: rgb(84, 184, 84);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.red {
+    background-color: rgb(250, 59, 59);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%; 
+}
+
+.orange {
+    background-color: rgb(243, 143, 62);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}

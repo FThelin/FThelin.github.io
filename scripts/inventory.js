@@ -12,9 +12,7 @@
                 }
             }       
         }
-    })
-    
-    
+    })    
 
     //Remove items from combo slots
     $(inventory.comboSlots).click(e => {
@@ -43,11 +41,13 @@
         if (inRoom === 'basement' && kitchen.roomState === 4 && livingRoom.roomState >= 2){
             if (comboSource1 === 'img/inventory/hammer.jpg' && comboSource2 === 'img/inventory/liqnitro.jpg' 
             || comboSource1 === 'img/inventory/liqnitro.jpg' && comboSource2 === 'img/inventory/hammer.jpg') {
-                writeText('You: I frooze the lock with the liquid nitrogen and smashed it to pieces with the hammer. The basement door is now open.', '');                
+                basement.roomState = 1;
+                stageTwoWriteText();              
                 inventory.comboSlots[0].setAttribute('src', 'img/comboslot.jpg');
                 inventory.comboSlots[1].setAttribute('src', 'img/comboslot.jpg');
                 basement.completion = 25;
                 updateCompletion('Basement', basement.completion);
+                changeImage('img/basement.jpg');                
             }
         }               
     })

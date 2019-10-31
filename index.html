@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="wiresGame.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="scripts/main.js" defer></script>
     <script src="scripts/prompt.js" defer></script>  
     <script src="scripts/dialog.js" defer></script>
     <script src="scripts/inventory.js" defer></script>
+    <script src="scripts/wiresGame.js" defer></script>
     <title>Mansion Murder</title>
 </head>
 <body class="middle">
@@ -32,8 +34,12 @@
         
         <!-- Room images -->
         <div class="rooms">
-            <img src="img/mansion.jpg" alt="dark picture of a mansion">
-        </div>        
+            <img src="img/mansion.jpg" alt="dark picture of a mansion">            
+        </div>
+        
+        <!-- Wires Game -->
+        <div class="wires"></div>
+        <button class="btn">CHECK</button>
         
         <!-- Text Area -->
         <div class="text-area middle">
@@ -148,7 +154,7 @@
                 <img src="img/gardener.jpg">
                 <ul>
                     <li>Alfred</li>
-                    <li>1891/04/10</li>
+                    <li>1891/04/23</li>
                     <li>Gardener</li>
                     <li>186cm</li>
                     <li>85kg</li>

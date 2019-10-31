@@ -96,8 +96,7 @@ body {
     "ta ta ta ta ta ta is is is is is it"
     "ta ta ta ta ta ta is is is is is st"
     "ta ta ta ta ta ta is is is is is ."
-    ;
-    
+    ;  
 }
 
 /***** Header *****/
@@ -120,7 +119,7 @@ header h1 {
 }
 
 .rooms img {
-    width: 100%;
+    width: 100%; 
 }
 
 /***** Text Area *****/

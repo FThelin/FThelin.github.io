@@ -42,6 +42,12 @@ const stageTwoWriteText = () => {
                 case 2:
                     writeText('You: Nothing to do here right now...', '');
                     break;
+                case 3:
+                    writeText('You: The body is taken away to the coroner. There seem to be something written in blood where the body were..', '/Write it down');
+                    break;
+                case 4:
+                    writeText('You: Done with this room', '');
+                    break;
             }
             break;
         case 'kitchen':
@@ -75,16 +81,35 @@ const stageTwoWriteText = () => {
                     writeText('You: Nailed it! Inside is a love letter from a secret admirer and a rusty key.', '/Add to inventory');
                     break;
                 case 3:
-                    writeText('You: Nothing to do here right now...', '');
+                    writeText('You: I´m done with this room.', '');
             }
             break;
         case 'basement':
             switch (basement.roomState){
                 case 0:
-                    writeText('You: Hmm, the door is locked. I need a key to be able to open it.', '');
+                    writeText('You: Hmm, the door is locked. I need a key or something to be able to open it.', '');
                     break;
                 case 1:
-                    writeText('Källaren är låst', 'test');
+                    writeText('You: I frooze the lock with the liquid nitrogen and smashed it to pieces with the hammer. The basement door is now open. Let´s go down the stairs.', '/Search basement');
+                    break;
+                case 2:
+                    writeText('You: The basement is completley empty except from a safe in the dark corner, barely visible.', '/Examine safe');
+                    break;
+                case 3:
+                    writeText('You: I need a 6 digit code to open it. But I can´t even try, the wiring is broken. The safe doesen´t get any power right now.', '/Fix wiring');
+                    break;
+                case 5:
+                    writeText('You: Great, now the safe have power. I can now enter the 6 digit code to open it.', 'number number number number number number');
+                    break;
+                case 6:
+                    writeText('You: Sweet, it´s open. I found the murder weapon. A bloody kitchen knife and a lot of love letters waiting to be sent. Also a note: -"If I can´t have her, no-one can."', '/Think');
+                    break;
+                case 7:
+                    writeText('You: The owner of this safe is the murderer. It contained the murder weapon and the murderer was unhappily in love with Mrs Smith. I have all the clues to figure out who the murderer is.', 'Type in the murderer´s first name ');
+                    break;
+                case 8:
+                    writeText('Game: CONGRATULATIONS!! You found the murderer. Good job!.', '');
+                    break;
             }
             break;    
     }   
