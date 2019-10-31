@@ -30,7 +30,9 @@ for(let i = 0; i < 49; i++){
 
 $('.wires').html(gameBoard);
 
-
+/**
+ * Pick the lightblue color to paint the game board
+ */
 $('.lightblue').on('click', () => {
     if (colorSelected === false){
         colorSelected = true;
@@ -43,6 +45,9 @@ $('.lightblue').on('click', () => {
     }    
 })
 
+/**
+ * Pick the blue color to paint the game board
+ */
 $('.blue').click(() => {
     if (colorSelected === false){
         colorSelected = true;
@@ -55,6 +60,9 @@ $('.blue').click(() => {
     }    
 })
 
+/**
+ * Pick the yellow color to paint the game board
+ */
 $('.yellow').click(() => {
     if (colorSelected === false){
         colorSelected = true;
@@ -67,6 +75,9 @@ $('.yellow').click(() => {
     }    
 })
 
+/**
+ * Pick the green color to paint the game board
+ */
 $('.green').click(() => {
     if (colorSelected === false){
         colorSelected = true;
@@ -79,6 +90,9 @@ $('.green').click(() => {
     }    
 })
 
+/**
+ * Pick the red color to paint the game board
+ */
 $('.red').click(() => {
     if (colorSelected === false){
         colorSelected = true;
@@ -91,6 +105,9 @@ $('.red').click(() => {
     }    
 })
 
+/**
+ * Pick the orange color to paint the game board
+ */
 $('.orange').click(() => {
     if (colorSelected === false){
         colorSelected = true;
@@ -103,13 +120,18 @@ $('.orange').click(() => {
     }    
 })
 
-
+/**
+ * Paint on the game board with selected color
+ */
 $('.noColor').mouseover(e => { 
     $(e.target).css('backgroundColor', bgColor);         
 })
 
 const tiles = $('.outer').children();
 
+/**
+ * Click "Check" button to see if you win
+ */
 $('.btn').click(() => {
     let lb = 'rgb(0, 255, 200)';
     let b = 'rgb(36, 36, 173)';

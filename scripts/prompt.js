@@ -1,4 +1,6 @@
-//COMMAND PROMPT ACTIONS
+/**
+ * Sending the commands and trigger different actions depending on which room and stage of the room
+ */
 $('form button').click(() => {
         
     let commandEntered = $('form input').val().toLowerCase();        

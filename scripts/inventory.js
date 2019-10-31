@@ -1,4 +1,6 @@
-    //Get inventory items to combo slots   
+    /**
+     * Clicking on inventory items bring them down to the combination slots
+     */
     $(inventory.slots).click(e => {
         if (kitchen.roomState != 2){
                 inventory.source = e.target.getAttribute('src');
@@ -14,7 +16,9 @@
         }
     })    
 
-    //Remove items from combo slots
+    /**
+     * Clicking on items in the combination slots remove them from there
+     */
     $(inventory.comboSlots).click(e => {
         inventory.comboSource = e.target.getAttribute('src');
         if (inventory.comboSource != 'img/comboslot.jpg'){
@@ -22,7 +26,9 @@
         }
     })
 
-    //Combine items from the inventory
+    /**
+     * Combine correct items in the combination slots
+     */
     $('.combo button').click(() => {
         let comboSource1 = inventory.comboSlots[0].getAttribute('src');
         let comboSource2 = inventory.comboSlots[1].getAttribute('src');
@@ -52,6 +58,9 @@
         }               
     })
 
+    /**
+     * Using the key to open the kitchen drawer
+     */
     $(inventory.slots[6]).click(() => {
         if (inRoom === 'kitchen' && bedroom.roomState === 3 && kitchen.roomState === 2){
             kitchen.roomState = 3;

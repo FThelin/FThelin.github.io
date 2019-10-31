@@ -5,17 +5,17 @@
     display: none;
     flex-wrap: wrap;
     position: absolute;
-    left: 35%;
+    left: calc(50% - 17.5rem);
     top: 15%;
     box-shadow: 4px 4px 16px black;    
 }
 
 .btn {
     position: absolute;
-    left: 47.5%;
-    top: 11%;
-    width: 5rem;
-    height: 2rem;
+    left: calc(50% - 4rem);
+    top: 0;
+    width: 8rem;
+    height: 3rem;
     background-color: rgb(64, 252, 89);
     display: none;
 }

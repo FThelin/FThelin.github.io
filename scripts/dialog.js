@@ -1,3 +1,6 @@
+/**
+ * Print dialog message and commands depending on which room user is in and in which stage
+ */
 const stageTwoWriteText = () => {
     switch (inRoom){
         case 'hallway':

@@ -34,28 +34,41 @@
         comboSource: ''
     }
         
-    //Write text to the text area and show commands
+    /**
+     * Write text to the text area and show commands
+     * @param {String} message The dialog message to be shown in the text area
+     * @param {String} commands The commands available to type
+     */
     const writeText = (message, commands) => {
         $('.text-area div').text(message);
         $('.commands').text(commands);
     }
 
-    //Write error message when using a non valid command
+    /**
+     * Write error message when using a non valid command
+     */
     const wrongCommand = () => {
         $('.text-area div').text('Game: -Sorry, I don´t understand that. Try Again');
     }
 
-    //Clear command prompt
+    /**
+     * Clear input field when user has typed a successful command
+     */
     const clearCommandPrompt = () => {
         $('form input').val('');
     }
 
-    //Change room image
+   /**
+    * Change image depending on what room user is in and state of the game
+    * @param {String} url The url to the image 
+    */
     const changeImage = url => {
         $('.rooms img').attr('src' ,url);
     } 
 
-    //Switch between suspects and inventory view
+    /**
+     * Switch between suspects and inventory view
+     */
     $('.inventory-tab').click(() => {
         $('.inventory').css('display', 'flex');
         $('.suspects').css('display', 'none');
@@ -66,12 +79,19 @@
         $('.inventory').css('display', 'none');
     }) 
     
+    /**
+     * Show the room completen % bar in each room
+     * @param {String} room The room the user is in
+     * @param {Number} completion How many % is done in that room
+     */
     const updateCompletion = (room, completion) => {
         $('.room-completion div p').text(`${room}: ${completion}%`);
         $('.room-completion div').css('background', `linear-gradient(to right,#204580 ${completion}%, rgba(0, 255, 255, 0) 0%)`);
     } 
 
-    //Continue from start screen
+    /**
+     * Step into the mansion from the starting screen. Grabbing the players name and put in Welcome message
+     */
     $('.start-screen div p').click(() => {
         $('.start-screen').fadeOut("slow", () => {
             $('.start-screen').css('display', 'none');
@@ -83,7 +103,9 @@
         })
     })      
 
-    //Go to rooms using map
+    /**
+     * Navigation to different rooms using the map.
+     */
     $('map area').click(e => {
         e.preventDefault();        
         let room = e.target.getAttribute('class');
