@@ -1,5 +1,6 @@
     /**
      * Clicking on inventory items bring them down to the combination slots
+     * @param {Object} e The event object. Needed to access the target property
      */
     $(inventory.slots).click(e => {
         if (kitchen.roomState != 2){
@@ -18,6 +19,7 @@
 
     /**
      * Clicking on items in the combination slots remove them from there
+     * @param {Object} e The event object. Needed to access the target property
      */
     $(inventory.comboSlots).click(e => {
         inventory.comboSource = e.target.getAttribute('src');

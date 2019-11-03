@@ -93,18 +93,24 @@
      * Step into the mansion from the starting screen. Grabbing the players name and put in Welcome message
      */
     $('.start-screen div p').click(() => {
-        $('.start-screen').fadeOut("slow", () => {
-            $('.start-screen').css('display', 'none');
-            
-            playerName = $('.start-screen div input').val();            
-            writeText(`Officer: -Detective ${playerName}, thanks for getting here so fast. As you know, Mrs Smith has been murdered.
-            She was stabbed in the chest with a kitchen knife. Other than the victim there were 5 other people in the house. I am considering them
-            all as suspects. You should go inside.`, `/Enter Mansion`);
-        })
+        playerName = $('.start-screen div input').val();
+        if (playerName.length >= 1) {
+            $('.start-screen').fadeOut("slow", () => {
+                $('.start-screen').css('display', 'none');                
+                            
+                writeText(`Officer: -Detective ${playerName}, thanks for getting here so fast. As you know, Mrs Smith has been murdered.
+                She was stabbed in the chest with a kitchen knife. Other than the victim there were 5 other people in the house. I am considering them
+                all as suspects. You should go inside.`, `/Enter Mansion`);
+            })
+        } else {
+            $('.error-message').text('Please enter a name');
+        }
+        
     })      
 
     /**
      * Navigation to different rooms using the map.
+     * @param {Object} e The event object. Needed to access the target property
      */
     $('map area').click(e => {
         e.preventDefault();        

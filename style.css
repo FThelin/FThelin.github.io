@@ -64,6 +64,11 @@ body {
     cursor: pointer;
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
 @keyframes blink {
     0% {
         opacity: 1;

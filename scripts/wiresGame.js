@@ -122,6 +122,7 @@ $('.orange').click(() => {
 
 /**
  * Paint on the game board with selected color
+ * @param {Object} e The event object. Needed to access the target property
  */
 $('.noColor').mouseover(e => { 
     $(e.target).css('backgroundColor', bgColor);         

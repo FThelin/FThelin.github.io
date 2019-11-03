@@ -108,10 +108,13 @@ const stageTwoWriteText = () => {
                     writeText('You: Sweet, it´s open. I found the murder weapon. A bloody kitchen knife and a lot of love letters waiting to be sent. Also a note: -"If I can´t have her, no-one can."', '/Think');
                     break;
                 case 7:
-                    writeText('You: The owner of this safe is the murderer. It contained the murder weapon and the murderer was unhappily in love with Mrs Smith. I have all the clues to figure out who the murderer is.', 'Type in the murderer´s first name ');
+                    writeText('You: The owner of this safe is the murderer. It contained the murder weapon and the murderer was unhappily in love with Mrs Smith. I have all the clues to figure out who the murderer is.', 'Type in the murderer´s first name');
                     break;
                 case 8:
                     writeText('Game: CONGRATULATIONS!! You found the murderer. Good job!.', '');
+                    break;
+                case 9:
+                    writeText('Game: That is not the murderer', 'Type in the murderer´s first name');
                     break;
             }
             break;    

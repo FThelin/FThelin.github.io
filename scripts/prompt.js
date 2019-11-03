@@ -1,4 +1,15 @@
 /**
+ * To be able to use "Enter" when sending commands.
+ * @param {Object} e Event object
+ */
+$('.text-area form input').keydown(e => {
+    if(e.keyCode == 13) {
+        e.preventDefault();        
+        $('form button').click();
+    }
+})
+
+/**
  * Sending the commands and trigger different actions depending on which room and stage of the room
  */
 $('form button').click(() => {
@@ -206,6 +217,27 @@ $('form button').click(() => {
                     break;
                 case 'alfred':
                     basement.roomState = 8;                                            
+                    clearCommandPrompt();
+                    stageTwoWriteText();
+                    changeImage('img/arrested.jpg');                                  
+                    break;
+                case 'claudia':
+                    basement.roomState = 9;                                            
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
+                    break;
+                case 'george':
+                    basement.roomState = 9;                                            
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
+                    break;
+                case 'nadja':
+                    basement.roomState = 9;                                            
+                    clearCommandPrompt();
+                    stageTwoWriteText();                                  
+                    break;
+                case 'bruce':
+                    basement.roomState = 9;                                            
                     clearCommandPrompt();
                     stageTwoWriteText();                                  
                     break;
