@@ -23,6 +23,10 @@ att klicka på dem eller kombinera 2 st. Det finns även en "Suspects" flik som 
 
 Det finns även ett par pussel som måste lösas för att komma vidare. 
 
+Avgränsningar:
+Sidan är inte responsiv i den mån att den fungerar inte på mindre skärmar. Den är testad med Desktop och i google chrome. 
+Det fanns varken tid eller direkt anledning att göra den mobilanpassad så detta är ett desktop spel. 
+
 
 ####GitHub repo:
 https://github.com/FThelin/FThelin.github.io
