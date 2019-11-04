@@ -2,7 +2,6 @@ let gameBoard = [];
 let bgColor;
 let colorSelected = false;
 
-
 for(let i = 0; i < 49; i++){
     if (i === 0 || i === 43) {
         let html = `<div class="outer"><div class="lightblue"></div></div>`;  
@@ -175,8 +174,8 @@ $('.btn').click(() => {
         basement.completion = 80;
         updateCompletion('Basement', basement.completion);                    
         clearCommandPrompt();
-        $('.wires').css('display', 'none');
-        $('.btn').css('display', 'none');
+        $('.wires').hide();
+        $('.btn').hide();
         stageTwoWriteText();
         changeImage('img/basementsafe.jpg');                    
     } 

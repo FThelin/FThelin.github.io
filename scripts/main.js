@@ -71,12 +71,12 @@
      */
     $('.inventory-tab').click(() => {
         $('.inventory').css('display', 'flex');
-        $('.suspects').css('display', 'none');
+        $('.suspects').hide();
     })
 
     $('.suspects-tab').click(() => {
         $('.suspects').css('display', 'flex');
-        $('.inventory').css('display', 'none');
+        $('.inventory').hide();
     }) 
     
     /**
@@ -96,7 +96,7 @@
         playerName = $('.start-screen div input').val();
         if (playerName.length >= 1) {
             $('.start-screen').fadeOut("slow", () => {
-                $('.start-screen').css('display', 'none');                
+                $('.start-screen').hide();              
                             
                 writeText(`Officer: -Detective ${playerName}, thanks for getting here so fast. As you know, Mrs Smith has been murdered.
                 She was stabbed in the chest with a kitchen knife. Other than the victim there were 5 other people in the house. I am considering them
